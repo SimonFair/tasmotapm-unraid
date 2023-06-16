@@ -1,10 +1,10 @@
 <?xml version='1.0' standalone='yes'?>
 <!DOCTYPE PLUGIN [
 <!ENTITY name      "tasmotapm">
-<!ENTITY author    "Flippo24">
-<!ENTITY version   "2021.03.24">
+<!ENTITY author    "SimonFair">
+<!ENTITY version   "2023.06.16">
 <!ENTITY launch    "Settings/TasmotaPMSettings">
-<!ENTITY gitURL    "https://raw.githubusercontent.com/Flippo24/&name;-unraid/main">
+<!ENTITY gitURL    "https://raw.githubusercontent.com/SimonFair/&name;-unraid/main">
 <!ENTITY pluginURL "&gitURL;/&name;.plg">
 <!ENTITY pkgURL    "&gitURL;/pkg">
 <!ENTITY plgPATH   "/boot/config/plugins/&name;">
@@ -14,6 +14,8 @@
 <PLUGIN name="&name;" author="&author;" version="&version;" icon="tasmotapm.png" launch="&launch;" pluginURL="&pluginURL;">
 <CHANGES>
 ##&name;
+###2023.06.16
+- Make 6.12 compatible
 ###2021.03.24
 - fix efficiency factor and dashboard moving.
 ###2021.03.22
