@@ -103,9 +103,7 @@ function tasmotapm_status() {
             $(".tasmotapm-costs_unit").html(data.Costs_Unit);
         }
     });
-if (<?=$tasmotapm_cfg['UIREFRESH'];?>) {
-    setInterval(tasmotapm_status, <?=$tasmotapm_cfg['UIREFRESH'];?>);
-}}
+}
 
 $(function(){
   tasmotapm_status();
