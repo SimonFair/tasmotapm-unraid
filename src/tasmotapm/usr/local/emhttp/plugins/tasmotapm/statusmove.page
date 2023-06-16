@@ -105,10 +105,12 @@ function tasmotapm_status() {
     });
 }
 
+$(function(){
+  tasmotapm_status();
+});
+
 if (<?=$tasmotapm_cfg['UIREFRESH'];?>) {
-    setInterval(tasmotapm_status, <?=$tasmotapm_cfg['UIREFRESH'];?>);
-} else {
-    tasmotapm_status();
+  setInterval(tasmotapm_status, <?=$tasmotapm_cfg['UIREFRESH'];?>);
 }
 
 </script>
