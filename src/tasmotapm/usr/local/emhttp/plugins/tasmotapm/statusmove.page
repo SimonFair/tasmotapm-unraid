@@ -38,7 +38,7 @@ $mytiles[$pluginname]['column1'] =
             </tr>
 
             <tr class="tasmotapm_view">
-            <td><span class="w26">Yesterday:</span><span class="w26 tasmotapm-energy-yesterday"></span> 
+            <td><span class="w26">Yesterday:</span><span class="w26 tasmotapm-energy-yesterday"></span>
             <span class="w26 tasmotapm-costs_yesterday"></span> </td>
             </tr>
 
@@ -48,36 +48,36 @@ $mytiles[$pluginname]['column1'] =
                 <span class="w26 tasmotapm-costs_total"></span></span></td>
             </tr>
 
-            <tr class="tasmotapm_view">     
+            <tr class="tasmotapm_view">
                 <td><span class="w26">Power</span>
                 <span class="w26 tasmotapm-energy-power"></span></td>
             </tr>
             <tr class="tasmotapm_view">
-              
+
                 <td><span class="w26">Voltage</span>
                 <span class="w26 tasmotapm-energy-voltage"></span></td>
-               
+
             </tr>
             <tr class="tasmotapm_view">
-             
+
                 <td><span class="w26">Current</span>
             <span class="w26 tasmotapm-energy-current"></span></td>
-           
+
             </tr>
             <tr class="tasmotapm_view">
             <td><span class="w26">Apparent power</span>
             <span class="w26 tasmotapm-energy-apparentpower"></span></td>
-       
+
             </tr>
             <tr class="tasmotapm_view">
          <td><span class="w26">Reactive power</span>
             <span class="w26 tasmotapm-energy-reactivepower"></span></td>
-  
+
             </tr>
             <tr class="tasmotapm_view">
               <td><span class="w26">Efficiency</span>
                 <span class="w26 tasmotapm-energy-efficiency"></span></td>
-          
+
             </tr>
 </tbody>
 EOT;
@@ -105,9 +105,10 @@ function tasmotapm_status() {
     });
 }
 
-$(function(){
-  tasmotapm_status();
-});
-
+if (<?=$tasmotapm_cfg['UIREFRESH'];?>) {
+    setInterval(tasmotapm_status, <?=$tasmotapm_cfg['UIREFRESH'];?>);
+} else {
+    tasmotapm_status();
+}
 
 </script>
