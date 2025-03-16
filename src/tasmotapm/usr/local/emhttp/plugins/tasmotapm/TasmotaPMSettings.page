@@ -5,6 +5,11 @@ Title="Tasmota Power Monitor"
 <?php
 $tasmotapm_cfg 			= parse_plugin_cfg("tasmotapm",true);
 $tasmotapm_device_ip	= isset($tasmotapm_cfg['DEVICE_IP']) ? $tasmotapm_cfg['DEVICE_IP'] : "";
+$tasmotapm_device_ip2	= isset($tasmotapm_cfg['DEVICE_IP2']) ? $tasmotapm_cfg['DEVICE_IP2'] : "";
+$tasmotapm_device_ip3	= isset($tasmotapm_cfg['DEVICE_IP3']) ? $tasmotapm_cfg['DEVICE_IP3'] : "";
+$tasmotapm_device_name1	= isset($tasmotapm_cfg['DEVICE_NAME1']) ? $tasmotapm_cfg['DEVICE_NAME1'] : "";
+$tasmotapm_device_name2	= isset($tasmotapm_cfg['DEVICE_NAME2']) ? $tasmotapm_cfg['DEVICE_NAME2'] : "";
+$tasmotapm_device_name3	= isset($tasmotapm_cfg['DEVICE_NAME3']) ? $tasmotapm_cfg['DEVICE_NAME3'] : "";
 $tasmotapm_use_pass			= isset($tasmotapm_cfg['DEVICE_USE_PASS']) ? $tasmotapm_cfg['DEVICE_USE_PASS'] : "false";
 $tasmotapm_device_user	= isset($tasmotapm_cfg['DEVICE_USER']) ? $tasmotapm_cfg['DEVICE_USER'] : "admin";
 $tasmotapm_device_pass	= isset($tasmotapm_cfg['DEVICE_PASS']) ? $tasmotapm_cfg['DEVICE_PASS'] : "";
@@ -28,8 +33,23 @@ Username:
 Password:
 : <input id="DEVICE_PASS" type="password" class="stopped" name="DEVICE_PASS" maxlength="50" value="<?=$tasmotapm_device_pass;?>" title="" placeholder="" >  
 
-Device IP:
+Device IP 1:
 : <input id="DEVICE_IP" type="text" class="stopped" name="DEVICE_IP" maxlength="15" value="<?=$tasmotapm_device_ip;?>" title="" placeholder="" >  
+
+Device Name 1:
+: <input id="DEVICE_NAME1" type="text" class="stopped" name="DEVICE_NAME1" maxlength="15" value="<?=$tasmotapm_device_name1;?>" title="" placeholder="" >  
+
+Device IP 2:
+: <input id="DEVICE_IP2" type="text" class="stopped" name="DEVICE_IP2" maxlength="15" value="<?=$tasmotapm_device_ip2;?>" title="" placeholder="" >  
+
+Device Name 2:
+: <input id="DEVICE_NAME2" type="text" class="stopped" name="DEVICE_NAME2" maxlength="15" value="<?=$tasmotapm_device_name2;?>" title="" placeholder="" >  
+
+Device IP 3: 
+: <input id="DEVICE_IP3" type="text" class="stopped" name="DEVICE_IP3" maxlength="15" value="<?=$tasmotapm_device_ip3;?>" title="" placeholder="" >  
+
+Device Name 3:
+: <input id="DEVICE_NAME3" type="text" class="stopped" name="DEVICE_NAME3" maxlength="15" value="<?=$tasmotapm_device_name3;?>" title="" placeholder="" >  
 
 UI Refresh rate (Milliseconds):
 : <input type="text" name="UIREFRESH" class="narrow" maxlength="50" value="<?=$tasmotapm_uirefresh;?>" placeholder="1000">
@@ -48,6 +68,8 @@ Unit for cost calculation:
 <script type="text/javascript">
 function resetDATA(form) {
 	form.DEVICE_IP.value = "";
+  form.DEVICE_IP2.value = "";
+  form.DEVICE_IP3.value = "";
   form.DEVICE_USE_PASS.value = 0;
   form.DEVICE_USER.value = "";
   form.DEVICE_PASS.value = "";

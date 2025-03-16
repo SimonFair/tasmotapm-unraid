@@ -25,85 +25,105 @@ Cond="version_compare(parse_ini_file('/etc/unraid-version')['version'],'6.11.9',
 */
 $pluginname = "tasmota"; // substitute this entry with the name of your plugin
 
- $tasmotapm_cfg = parse_plugin_cfg("tasmotapm",true);
-$mytiles[$pluginname]['column1'] =
-<<<EOT
-<tbody title="_(Tasmota)_">
-<tr><td>_(Tasmota Power Monitor)_<a href="/Dashboard/Settings/TasmotaPMSettings" title="_(Go to Tasmota settings)_"><i class="fa fa-fw fa-cog control"></i></a></td></tr>
-<tr><td><i class='icon-ups'></i><div class='section'><span id='load'>_(Usage)_: <span class='tasmotapm-energy-power'>0</span></span><br><br></div></td></tr>
+$tasmotapm_cfg = parse_plugin_cfg("tasmotapm",true);$count = 1;
 
-            <tr class="tasmotapm_view">
-            <td><span class="w26">Today:</span><span class="w26 tasmotapm-energy-today"></span>
-            <span class="w26 tasmotapm-costs_today"></td>
-            </tr>
+do {
+  $ip = $count == 1 ? $ip = $tasmotapm_cfg['DEVICE_IP'] : $tasmotapm_cfg["DEVICE_IP$count"];
+    if (isset($ip)) {  
+      if ($ip != "") {
+        $mytiles[$pluginname.$count]["column".$count] =
+        <<<EOT
+        <tbody title="_(Tasmota)_">
+        <tr><td>_(Tasmota Power Monitor)_ $count
+        <br><i class='icon-ups'></i><div class='section'><span id='load'>_(Usage)_: <span class='tasmotapm-energy-power$count'>0</span></span>
+        <span id='tasname$count'>_(Name)_: <span class='tasmotapm-name$count'></span></span>
+        <span id='tasip$count'>_(IP)_: <span class='tasmotapm-ip$count'></span></span>
+        <br><br>
+        </div><a href="/Dashboard/Settings/TasmotaPMSettings" title="_(Go to Tasmota settings)_"><i class="fa fa-fw fa-cog control"></i></a></td></tr>
 
-            <tr class="tasmotapm_view">
-            <td><span class="w26">Yesterday:</span><span class="w26 tasmotapm-energy-yesterday"></span>
-            <span class="w26 tasmotapm-costs_yesterday"></span> </td>
-            </tr>
+                    <tr class="tasmotapm_view">
+                    <td><span class="w26">Today:</span><span class="w26 tasmotapm-energy-today$count"></span>
+                    <span class="w26 tasmotapm-costs_today$count"></td>
+                    </tr>
 
-            <tr class="tasmotapm_view">
-                <td><span class="w26">Total:</span>
-                <span class="w26 tasmotapm-energy-total"></span>
-                <span class="w26 tasmotapm-costs_total"></span></span></td>
-            </tr>
+                    <tr class="tasmotapm_view">
+                    <td><span class="w26">Yesterday:</span><span class="w26 tasmotapm-energy-yesterday$count"></span>
+                    <span class="w26 tasmotapm-costs_yesterday$count"></span> </td>
+                    </tr>
 
-            <tr class="tasmotapm_view">
-                <td><span class="w26">Power</span>
-                <span class="w26 tasmotapm-energy-power"></span></td>
-            </tr>
-            <tr class="tasmotapm_view">
+                    <tr class="tasmotapm_view">
+                        <td><span class="w26">Total:</span>
+                        <span class="w26 tasmotapm-energy-total$count"></span>
+                        <span class="w26 tasmotapm-costs_total$count"></span></span></td>
+                    </tr>
 
-                <td><span class="w26">Voltage</span>
-                <span class="w26 tasmotapm-energy-voltage"></span></td>
+                    <tr class="tasmotapm_view">
+                        <td><span class="w26">Power</span>
+                        <span class="w26 tasmotapm-energy-power$count"></span></td>
+                    </tr>
+                    <tr class="tasmotapm_view">
 
-            </tr>
-            <tr class="tasmotapm_view">
+                        <td><span class="w26">Voltage</span>
+                        <span class="w26 tasmotapm-energy-voltage$count"></span></td>
 
-                <td><span class="w26">Current</span>
-            <span class="w26 tasmotapm-energy-current"></span></td>
+                    </tr>
+                    <tr class="tasmotapm_view">
 
-            </tr>
-            <tr class="tasmotapm_view">
-            <td><span class="w26">Apparent power</span>
-            <span class="w26 tasmotapm-energy-apparentpower"></span></td>
+                        <td><span class="w26">Current</span>
+                    <span class="w26 tasmotapm-energy-current$count"></span></td>
 
-            </tr>
-            <tr class="tasmotapm_view">
-         <td><span class="w26">Reactive power</span>
-            <span class="w26 tasmotapm-energy-reactivepower"></span></td>
+                    </tr>
+                    <tr class="tasmotapm_view">
+                    <td><span class="w26">Apparent power</span>
+                    <span class="w26 tasmotapm-energy-apparentpower$count"></span></td>
 
-            </tr>
-            <tr class="tasmotapm_view">
-              <td><span class="w26">Efficiency</span>
-                <span class="w26 tasmotapm-energy-efficiency"></span></td>
+                    </tr>
+                    <tr class="tasmotapm_view">
+                <td><span class="w26">Reactive power</span>
+                    <span class="w26 tasmotapm-energy-reactivepower$count"></span></td>
 
-            </tr>
-</tbody>
-EOT;
-
+                    </tr>
+                    <tr class="tasmotapm_view">
+                      <td><span class="w26">Efficiency</span>
+                    <span class="w26 tasmotapm-energy-efficiency$count"></span></td>
+                    </tr>
+        </tbody>
+        EOT;
+      }
+    }
+    $count++;
+} while ($count < 4);
 ?>
 <script>
 
 function tasmotapm_status() {
     $.getJSON("/plugins/tasmotapm/status.php", (data) => {
-        if (data) {
-            $(".tasmotapm-energy-power").html(data.Power+" W");
-            $(".tasmotapm-energy-today").html(data.Today+" kWh");
-            $(".tasmotapm-energy-yesterday").html(data.Yesterday+" kWh");
-            $(".tasmotapm-energy-total").html(data.Total+" kWh");
-            $(".tasmotapm-energy-voltage").html(data.Voltage+" V");
-            $(".tasmotapm-energy-current").html(data.Current+" A");
-            $(".tasmotapm-energy-apparentpower").html(data.ApparentPower+" VA");
-            $(".tasmotapm-energy-reactivepower").html(data.ReactivePower+" VAr");
-            $(".tasmotapm-energy-efficiency").html((Number.parseFloat(data.Factor) * 100).toFixed()+" %");
-            $(".tasmotapm-costs_today").html((Number.parseFloat(data.Costs_Price) * Number.parseFloat(data.Today)).toFixed(2)+" "+data.Costs_Unit);
-            $(".tasmotapm-costs_yesterday").html((Number.parseFloat(data.Costs_Price) * Number.parseFloat(data.Yesterday)).toFixed(2)+" "+data.Costs_Unit);
-            $(".tasmotapm-costs_total").html((Number.parseFloat(data.Costs_Price) * Number.parseFloat(data.Total)).toFixed(2)+" "+data.Costs_Unit);
-            $(".tasmotapm-costs_unit").html(data.Costs_Unit);
+        if (data && typeof data === "object") {
+            // Convert the object values into an array and take up to 3 entries
+            let entries = Object.values(data).slice(0, 3);
+
+            entries.forEach((entry, indexx) => {
+              index = indexx + 1;
+                $(`.tasmotapm-energy-power${index}`).html(entry.Power + " W");
+                $(`.tasmotapm-energy-today${index}`).html(entry.Today + " kWh");
+                $(`.tasmotapm-energy-yesterday${index}`).html(entry.Yesterday + " kWh");
+                $(`.tasmotapm-energy-total${index}`).html(entry.Total + " kWh");
+                $(`.tasmotapm-energy-voltage${index}`).html(entry.Voltage + " V");
+                $(`.tasmotapm-energy-current${index}`).html(entry.Current + " A");
+                $(`.tasmotapm-energy-apparentpower${index}`).html(entry.ApparentPower + " VA");
+                $(`.tasmotapm-energy-reactivepower${index}`).html(entry.ReactivePower + " VAr");
+                $(`.tasmotapm-energy-efficiency${index}`).html((Number.parseFloat(entry.Factor) * 100).toFixed() + " %");
+                $(`.tasmotapm-costs_today${index}`).html((Number.parseFloat(entry.Costs_Price) * Number.parseFloat(entry.Today)).toFixed(2) + " " + entry.Costs_Unit);
+                $(`.tasmotapm-costs_yesterday${index}`).html((Number.parseFloat(entry.Costs_Price) * Number.parseFloat(entry.Yesterday)).toFixed(2) + " " + entry.Costs_Unit);
+                $(`.tasmotapm-costs_total${index}`).html((Number.parseFloat(entry.Costs_Price) * Number.parseFloat(entry.Total)).toFixed(2) + " " + entry.Costs_Unit);
+                $(`.tasmotapm-costs_unit${index}`).html(entry.Costs_Unit);
+                $(`.tasmotapm-name${index}`).html(entry.Name);
+                $(`.tasmotapm-ip${index}`).html(entry.IP);
+            });
         }
     });
 }
+
 
 $(function(){
   tasmotapm_status();
