@@ -37,19 +37,20 @@ if ($tasmotapm_use_pass == 1) {
 
 $Url = $Url . "cmnd=Status%208";
 
-$datajson = file_get_contents($Url);
+$datajson = @file_get_contents($Url);
+#$datajson = @file_get_contents("/tmp/File".${"tasmotapm_device_ip".$count});
 $data = json_decode($datajson, true); 
 
 $json[$count] = array(
-		'Total' => $data['StatusSNS']['ENERGY']['Total'],
-		'Today' => $data['StatusSNS']['ENERGY']['Today'],
-		'Yesterday' => $data['StatusSNS']['ENERGY']['Yesterday'],
-		'Voltage' => $data['StatusSNS']['ENERGY']['Voltage'],
-		'Current' => $data['StatusSNS']['ENERGY']['Current'],
-		'ApparentPower' => $data['StatusSNS']['ENERGY']['ApparentPower'],
-		'ReactivePower' => $data['StatusSNS']['ENERGY']['ReactivePower'],
-		'Factor' => $data['StatusSNS']['ENERGY']['Factor'],
-		'Power' => $data['StatusSNS']['ENERGY']['Power'],
+		'Total' => $data['StatusSNS']['ENERGY']['Total'] ?? null,
+		'Today' => $data['StatusSNS']['ENERGY']['Today'] ?? null,
+		'Yesterday' => $data['StatusSNS']['ENERGY']['Yesterday'] ?? null,
+		'Voltage' => $data['StatusSNS']['ENERGY']['Voltage'] ?? null,
+		'Current' => $data['StatusSNS']['ENERGY']['Current'] ?? null,
+		'ApparentPower' => $data['StatusSNS']['ENERGY']['ApparentPower'] ?? null,
+		'ReactivePower' => $data['StatusSNS']['ENERGY']['ReactivePower'] ?? null,
+		'Factor' => $data['StatusSNS']['ENERGY']['Factor'] ?? null,
+		'Power' => $data['StatusSNS']['ENERGY']['Power'] ?? null,
 		'Costs_Price' => $tasmotapm_costs_price,
 		'Costs_Unit' => $tasmotapm_costs_unit,
 		'Name' => ${"tasmotapm_device_name".$count},
