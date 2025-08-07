@@ -61,7 +61,7 @@ Unit for cost calculation:
 : <input id="COSTS_UNIT" type="text" class="stopped" name="COSTS_UNIT" maxlength="10" value="<?=$tasmotapm_costs_unit;?>" title="" placeholder="" >  
 
  <input id="DEFAULT" class="stopped" type="submit" value="Default" onClick="resetDATA(this.form)">
-: <input id="btnApply" type="submit" value="Apply"><input type="button" value="Done" onClick="done()">
+: <span class="buttons-spaced"><input id="btnApply" type="submit" value="Apply"><input type="button" value="Done" onClick="done()"><span>
 </form>
 
 
