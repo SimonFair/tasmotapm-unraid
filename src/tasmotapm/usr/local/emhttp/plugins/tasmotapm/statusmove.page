@@ -34,10 +34,27 @@ do {
         $mytiles[$pluginname.$count]["column".$count] =
         <<<EOT
         <tbody id="tblTasmotaDash$count" title="_(Tasmota)_$count">
-        <tr><td>_(Tasmota Power Monitor)_ $count<a href="/Dashboard/Settings/TasmotaPMSettings" title="_(Go to Tasmota settings)_"><i class="fa fa-fw fa-cog control"></i></a>
-        <br><i class='icon-ups'></i><div class='section'><span id='load'>_(Usage)_: <span class='tasmotapm-energy-power$count'>0</span></span>
-        <span id='tasname$count'>_(Name)_: <span class='tasmotapm-name$count'></span></span>
-        <span id='tasip$count'>_(IP)_: <span class='tasmotapm-ip$count'></span></span><br><br></td></tr>
+        <tr>
+          <td>
+            <span class='tile-header'>
+              <span class='tile-header-left'>
+                <i class='icon-ups f32'></i>
+                <div class='section'>_(Tasmota Power Monitor)_ $count<br>
+                <span id='load'>_(Usage)_: <span class='tasmotapm-energy-power$count'>0</span></span>
+                <span id='tasname$count'>_(Name)_: <span class='tasmotapm-name$count'></span></span>
+                <span id='tasip$count'>_(IP)_: <span class='tasmotapm-ip$count'></span></span></div>
+              </span>
+              <span class='tile-header-right'>
+                <span class='tile-header-right-controls'>
+                  <a href="/Dashboard/Settings/TasmotaPMSettings" title="_(Go to Tasmota settings)_">
+                    <i class="fa fa-fw fa-cog control"></i>
+                  </a>
+                </span>
+              </span>
+            </span>
+          </td>
+        </tr>
+
 
                     <tr class="tasmotapm_view">
                     <td><span class="w26">Today:</span><span class="w26 tasmotapm-energy-today$count"></span>
